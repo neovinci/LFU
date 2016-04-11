@@ -21,10 +21,9 @@ public class LFUCashe {
 		for(int i = 0; i <= maxSize; i++) {
 			frequency[i] = new LinkedList<String>();
 		}
-	}
+	}	
 	
-	
-	
+	//add data to cache and eviction if it need
 	public boolean add(String data) {
 		boolean isAdded = true;
 		
@@ -39,6 +38,7 @@ public class LFUCashe {
 		return isAdded;
 	}
 	
+	//get data from cache
 	public String get(String data) {
 		String currentDate = cashe.containsKey(data) ? data : null;
 		
@@ -58,6 +58,7 @@ public class LFUCashe {
 		return currentDate;
 	}
 	
+	//private method add data
 	private boolean addToCashe(String data) {
 		boolean isAdded = true;
 		
@@ -70,10 +71,12 @@ public class LFUCashe {
 		return isAdded;
 	}
 	
+	//cache is full?
 	private boolean isFull() {
 		return cashe.size() == maxSize ? true : false;
 	}
 	
+	//eviction cache
 	private void eviction() {
 		int minFrequency = 0;
 		int evictionNumber = (int) Math.round(maxSize * evictionFactor);
@@ -88,10 +91,11 @@ public class LFUCashe {
 		}		
 	}
 	
+	//print cache
 	public void getCashe() {
 		
 		for(int i = 0; i < frequency.length; i++) {
-			System.out.printf("freq ¹ %d:", i);
+			System.out.printf("freq %d:", i);
 			for(String str : frequency[i]) {
 				System.out.printf("  %s(%d)", str, cashe.get(str));
 			}
